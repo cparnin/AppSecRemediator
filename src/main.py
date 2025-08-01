@@ -2,7 +2,7 @@
 """
 AppSec AI Scanner - Interactive CLI
 
-🔒 Enterprise-grade security scanner with AI-powered auto-remediation
+🔒 Production-ready security scanner with AI-powered auto-remediation
 
 This is the main entry point for the AppSec AI Scanner, providing:
 - Interactive repository selection with smart discovery

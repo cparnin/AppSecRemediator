@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-Enterprise-grade security scanner with AI-powered auto-remediation for any programming language. Combines static analysis (SAST), secrets detection, and dependency scanning with advanced Model Context Protocol (MCP) integration for cross-file vulnerability analysis across 15+ programming languages.
+Production-ready security scanner with AI-powered auto-remediation for any programming language. Combines static analysis (SAST), secrets detection, and dependency scanning with advanced Model Context Protocol (MCP) integration for cross-file vulnerability analysis across 15+ programming languages.
 
 **Core Mission**: Provide comprehensive security analysis with intelligent remediation, seamless CI/CD integration, and automatic compliance reporting.
 

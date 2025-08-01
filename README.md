@@ -1,6 +1,6 @@
 # AppSec AI Scanner
 
-Enterprise-grade security scanner with AI-powered auto-remediation.
+Production-ready security scanner with AI-powered auto-remediation.
 
 Combines static analysis (SAST), secrets detection, and dependency scanning with intelligent cross-file vulnerability analysis and automatic remediation. Features advanced Model Context Protocol (MCP) integration for real attack chain detection across 15+ programming languages.
 
@@ -111,7 +111,7 @@ git push
 
 ### Advanced MCP Enhancement
 
-The Model Context Protocol (MCP) integration provides enterprise-grade analysis beyond standard scanning:
+The Model Context Protocol (MCP) integration provides production-ready analysis beyond standard scanning:
 
 **🔗 Cross-File Attack Chain Detection**
 - **Multi-Language AST Parsing**: Real code understanding across JavaScript, Python, Java, Go, Rust, C#, Ruby, PHP, Swift, Kotlin
@@ -357,10 +357,9 @@ appsec_scanner/
 
 ## Documentation
 
-- **[Technical Architecture](main_logic.md)**: Detailed system design and data flow
+- **[Technical Architecture](TECHNICAL_OVERVIEW.md)**: System design and implementation details
+- **[Setup Guide](clients/SETUP.md)**: Quick start for GitHub Actions integration  
 - **[Changelog](CHANGELOG.md)**: Version history and upgrade notes
-- **[Claude Instructions](CLAUDE.md)**: AI assistant integration guide
-- **[Client Engagement Template](clients/CLIENT_ENGAGEMENT_TEMPLATE.md)**: Professional services guide
 
 ## Support & Troubleshooting
 
