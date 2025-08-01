@@ -406,8 +406,19 @@ Analytics are stored locally in `outputs/analytics/` and help improve the softwa
 
 ---
 
+## Contributing
+
+Contributions welcome! Please:
+- Open an issue first for major changes
+- Keep PRs focused and well-tested  
+- Follow existing code style
+
+*Note: This is a personal project with limited review capacity. Response times may vary.*
+
+---
+
 **OPEN SOURCE SOFTWARE**
 
-This software is released under the MIT License, allowing free use, modification, and distribution. Contributions are welcome! See [LICENSE](LICENSE) for complete terms and conditions.
+This software is released under the MIT License, allowing free use, modification, and distribution. See [LICENSE](LICENSE) for complete terms and conditions.
 
 *© 2025 Chad Parnin - Released under MIT License*
