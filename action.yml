@@ -1,0 +1,202 @@
+name: 'AppSec AI Scanner'
+description: 'AI-powered security scanner with SAST, secrets detection, dependency scanning, and auto-remediation'
+author: 'Chad Parnin'
+
+branding:
+  icon: 'shield'
+  color: 'red'
+
+inputs:
+  ai-provider:
+    description: "The AI provider to use ('openai' or 'claude')"
+    required: false
+    default: 'openai'
+  openai-api-key:
+    description: 'OpenAI API key for AI-powered features'
+    required: false
+  claude-api-key:
+    description: 'Claude API key for AI-powered features'
+    required: false
+  auto-fix:
+    description: 'Enable automatic remediation and PR creation'
+    required: false
+    default: 'true'
+  auto-fix-mode:
+    description: 'Specific auto-fix mode: 1=SAST+secrets, 2=dependencies, 3=both, 4=skip (overrides auto-fix if set)'
+    required: false
+    default: ''
+  fail-on-critical:
+    description: 'Fail the workflow if critical vulnerabilities are found'
+    required: false
+    default: 'false'
+  scan-level:
+    description: 'Scan level: critical-high or all'
+    required: false
+    default: 'critical-high'
+
+outputs:
+  total-findings:
+    description: 'Total number of security findings'
+  critical-findings:
+    description: 'Number of critical severity findings'
+  high-findings:
+    description: 'Number of high severity findings'
+  secrets-found:
+    description: 'Number of secrets detected'
+  report-path:
+    description: 'Path to the generated security report'
+  sbom-generated:
+    description: 'Whether SBOM was successfully generated (true/false)'
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+        
+    - name: Install Python dependencies
+      shell: bash
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r ${{ github.action_path }}/requirements.txt
+        pip install semgrep  # Semgrep via pip is reliable
+        
+    - name: Setup Trivy
+      uses: aquasecurity/setup-trivy@v0.2.0
+      with:
+        version: v0.64.1
+        
+    - name: Setup Gitleaks  
+      uses: gacts/gitleaks@v1
+      with:
+        version: latest
+        run: false  # Just install, don't run yet
+        
+    - name: Setup Syft for SBOM generation
+      shell: bash
+      run: |
+        curl -sSfL https://raw.githubusercontent.com/anchore/syft/main/install.sh | sh -s -- -b /usr/local/bin
+        syft version
+        
+    - name: Setup Node.js for dependency fixes
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        
+    - name: Setup Go for dependency fixes
+      uses: actions/setup-go@v5
+      with:
+        go-version: '1.21'
+        
+    - name: Setup Java for dependency fixes
+      uses: actions/setup-java@v4
+      with:
+        distribution: 'temurin'
+        java-version: '17'
+        
+    - name: Setup Rust for dependency fixes
+      uses: dtolnay/rust-toolchain@stable
+      
+    - name: Setup PHP for dependency fixes
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '8.2'
+        tools: composer
+        
+    - name: Configure Git for auto-remediation
+      shell: bash
+      run: |
+        git config --global user.email "test@gmail.com"
+        git config --global user.name "AppSec AI Scanner"
+        
+    - name: Run AppSec Scanner
+      shell: bash
+      env:
+        AI_PROVIDER: ${{ inputs.ai-provider }}
+        OPENAI_API_KEY: ${{ inputs.openai-api-key }}
+        CLAUDE_API_KEY: ${{ inputs.claude-api-key }}
+        APPSEC_AUTO_FIX: ${{ inputs.auto-fix }}
+        APPSEC_AUTO_FIX_MODE: ${{ inputs.auto-fix-mode }}
+        APPSEC_SCAN_LEVEL: ${{ inputs.scan-level }}
+        APPSEC_DEBUG: true
+      run: |
+        cd ${{ github.action_path }}/src
+        python main.py
+        
+    - name: Set outputs
+      shell: bash
+      run: |
+        # Change to action directory where outputs are created
+        cd ${{ github.action_path }}
+        
+        if [ -f "outputs/raw/semgrep.json" ]; then
+          critical_count=$(jq '[.[] | select(.severity == "critical")] | length' outputs/raw/semgrep.json 2>/dev/null || echo "0")
+          high_count=$(jq '[.[] | select(.severity == "high")] | length' outputs/raw/semgrep.json 2>/dev/null || echo "0")
+          total_sast=$((critical_count + high_count))
+        else
+          critical_count=0
+          high_count=0
+          total_sast=0
+        fi
+        
+        if [ -f "outputs/raw/gitleaks.json" ]; then
+          secrets_count=$(jq 'length' outputs/raw/gitleaks.json 2>/dev/null || echo "0")
+        else
+          secrets_count=0
+        fi
+        
+        if [ -f "outputs/raw/trivy-sca.json" ]; then
+          trivy_count=$(jq '[.[] | select(.severity == "CRITICAL" or .severity == "HIGH")] | length' outputs/raw/trivy-sca.json 2>/dev/null || echo "0")
+        else
+          trivy_count=0
+        fi
+        
+        total_findings=$((total_sast + secrets_count + trivy_count))
+        
+        echo "total-findings=$total_findings" >> $GITHUB_OUTPUT
+        echo "critical-findings=$critical_count" >> $GITHUB_OUTPUT
+        echo "high-findings=$high_count" >> $GITHUB_OUTPUT
+        echo "secrets-found=$secrets_count" >> $GITHUB_OUTPUT
+        echo "report-path=${{ github.action_path }}/outputs/" >> $GITHUB_OUTPUT
+        
+        # Check if SBOM was generated
+        if [ -f "outputs/sbom/sbom.cyclonedx.json" ] || [ -f "outputs/sbom/sbom.spdx.json" ]; then
+          echo "sbom-generated=true" >> $GITHUB_OUTPUT
+        else
+          echo "sbom-generated=false" >> $GITHUB_OUTPUT
+        fi
+        
+    - name: Check security gate
+      shell: bash
+      if: inputs.fail-on-critical == 'true'
+      run: |
+        # Change to action directory where outputs are created
+        cd ${{ github.action_path }}
+        
+        if [ -f "outputs/raw/semgrep.json" ]; then
+          critical_count=$(jq '[.[] | select(.severity == "critical")] | length' outputs/raw/semgrep.json 2>/dev/null || echo "0")
+          if [ "$critical_count" -gt 0 ]; then
+            echo "❌ $critical_count critical vulnerabilities found!"
+            exit 1
+          fi
+        fi
+        
+        if [ -f "outputs/raw/gitleaks.json" ]; then
+          secrets_count=$(jq 'length' outputs/raw/gitleaks.json 2>/dev/null || echo "0")
+          if [ "$secrets_count" -gt 0 ]; then
+            echo "❌ $secrets_count secrets detected!"
+            exit 1
+          fi
+        fi
+        
+        echo "✅ No critical security issues found"
+        
+    - name: Upload Security Reports
+      uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: security-reports
+        path: ${{ github.action_path }}/outputs/
+        retention-days: 30 
