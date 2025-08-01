@@ -4,7 +4,7 @@ Enterprise-grade security scanner with AI-powered auto-remediation.
 
 Combines static analysis (SAST), secrets detection, and dependency scanning with intelligent cross-file vulnerability analysis and automatic remediation. Features advanced Model Context Protocol (MCP) integration for real attack chain detection across 15+ programming languages.
 
-> **⚠️ IMPORTANT**: This is proprietary software owned by Chad Parnin. Commercial use requires licensing. See [LICENSE](LICENSE) for terms.
+> **📄 LICENSE**: This project is open source under the MIT License. See [LICENSE](LICENSE) for details.
 
 ## Key Features
 
@@ -403,12 +403,12 @@ While this repository is temporarily public for CI/CD testing, usage analytics a
 - Anonymized user identifiers (no sensitive data)
 - Feature usage patterns
 
-Analytics are stored locally in `outputs/analytics/` and help protect Chad Parnin's intellectual property while ensuring proper software usage.
+Analytics are stored locally in `outputs/analytics/` and help improve the software for all users.
 
 ---
 
-**PROPRIETARY SOFTWARE NOTICE**
+**OPEN SOURCE SOFTWARE**
 
-This software is protected by copyright and trade secret laws. Unauthorized reproduction, distribution, or use is strictly prohibited. See [LICENSE](LICENSE) for complete terms and conditions.
+This software is released under the MIT License, allowing free use, modification, and distribution. Contributions are welcome! See [LICENSE](LICENSE) for complete terms and conditions.
 
-*© 2025 Chad Parnin - Proprietary Software - Licensed Use Only*
+*© 2025 Chad Parnin - Released under MIT License*

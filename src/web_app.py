@@ -445,7 +445,7 @@ if __name__ == '__main__':
     print("🔒 AppSec AI Scanner Web Interface - © 2025 Chad Parnin")
     print("="*80)
     print(f"🚀 Starting Web API... [{datetime.datetime.now()}]")
-    print("🔒 PROPRIETARY SOFTWARE - Licensed Use Only - Chad Parnin")
+    print("📖 Open Source Software - MIT License - Chad Parnin")
     print("="*80)
     print()
     print("📖 API Documentation:")

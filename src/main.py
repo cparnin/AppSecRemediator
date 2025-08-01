@@ -818,7 +818,7 @@ def main() -> None:
     print("🔒 AppSec AI Scanner - © 2025 Chad Parnin")
     print("="*80)
     print("AI-powered security scanner that finds vulnerabilities and creates fixes")
-    print("🔒 PROPRIETARY SOFTWARE - Licensed Use Only - Chad Parnin")
+    print("📖 Open Source Software - MIT License - Chad Parnin")
     print("="*80)
     print()
     
