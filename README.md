@@ -68,7 +68,7 @@ cd src && python main.py
 - **Manual Remediation Control**: Choose specific auto-fix modes (1=SAST+secrets, 2=dependencies, 3=both, 4=skip)
 - **Rich Console Output**: Progress bars, color-coded findings, and detailed explanations
 
-<img width="663" height="195" alt="Screenshot 2025-07-31 at 9 41 17 AM" src="https://github.com/user-attachments/assets/f6e685ab-bd41-4746-8d00-75dd8c56e120" />
+<img width="738" height="239" alt="Screenshot 2025-08-01 at 8 24 06 AM" src="https://github.com/user-attachments/assets/93bfff32-f88f-448c-a5b2-62f17dd88fe0" />
 
 ### CI/CD Integration (GitHub Action workflow file)
 
