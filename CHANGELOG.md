@@ -8,19 +8,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [1.3.0] - 2025-01-28
 
 ### Major Features
-- **Enhanced Multi-Language MCP Analysis**: Comprehensive cross-file vulnerability analysis across 15+ programming languages
+- **Enhanced Multi-Language Cross-File Analysis**: Comprehensive cross-file vulnerability analysis across 15+ programming languages
 - **Smart Finding Prioritization**: Increased from 3 to 8 most critical findings with intelligent severity sorting
 - **Universal Framework Detection**: Automatic detection of Express, Spring, Django, Rails, Laravel, ASP.NET, React, Vue, Angular, and more
 - **Real Attack Chain Detection**: AST-based data flow tracing across multiple files and languages
 
 ### Improvements
-- **Consolidated MCP Reporting**: Eliminated duplicate analysis sections in HTML reports
+- **Consolidated Cross-File Analysis Reporting**: Eliminated duplicate analysis sections in HTML reports
 - **Actionable Remediation Details**: Enhanced reports with specific file paths, line numbers, and remediation steps
 - **Human-Readable Timestamps**: Improved report formatting and readability
-- **Framework-Aware Context**: MCP analysis now provides context based on detected web frameworks
+- **Framework-Aware Context**: Cross-file analysis now provides context based on detected web frameworks
 
 ### Bug Fixes
-- Fixed MCP analysis integration with all deployment modes (CLI, Web, CI/CD)
+- Fixed cross-file analysis integration with all deployment modes (CLI, Web, CI/CD)
 - Resolved CrossFileAnalyzer performance issues with large codebases
 - Improved error handling in multi-language AST parsing
 
@@ -31,7 +31,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [1.2.0] - 2025-01-27
 
 ### Major Features
-- **Model Context Protocol (MCP) Integration**: Real cross-file vulnerability analysis engine
+- **Cross-File Analysis Integration**: Real cross-file vulnerability analysis engine
 - **CrossFileAnalyzer Engine**: Static analysis with AST parsing for multiple programming languages
 - **Enhanced Business Impact Assessment**: Context-aware risk analysis based on file locations
 - **Advanced Import Graph Resolution**: Dependency tracking across project files

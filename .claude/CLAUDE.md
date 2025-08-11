@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-Production-ready security scanner with AI-powered auto-remediation for any programming language. Combines static analysis (SAST), secrets detection, and dependency scanning with advanced Model Context Protocol (MCP) integration for cross-file vulnerability analysis across 15+ programming languages.
+Production-ready security scanner with AI-powered auto-remediation for any programming language. Combines static analysis (SAST), secrets detection, and dependency scanning with advanced cross-file analysis integration for vulnerability analysis across 15+ programming languages.
 
 **Core Mission**: Provide comprehensive security analysis with intelligent remediation, seamless CI/CD integration, and automatic compliance reporting.
 
@@ -17,7 +17,7 @@ Production-ready security scanner with AI-powered auto-remediation for any progr
 ### Core Technologies
 - **Security Scanners**: Semgrep (SAST), Gitleaks (secrets), Trivy (dependencies)
 - **AI Integration**: OpenAI GPT-4 or Anthropic Claude for analysis and auto-remediation
-- **MCP Engine**: Cross-file attack chain detection with AST parsing for 15+ languages
+- **Cross-File Analysis Engine**: Cross-file attack chain detection with AST parsing for 15+ languages
 - **Compliance**: Automatic SBOM generation in CycloneDX and SPDX formats
 - **Framework Support**: Express, React, Vue, Angular, Spring, Django, Flask, Rails, Laravel, ASP.NET
 
@@ -35,7 +35,7 @@ cd src && python web_app.py
 cd src && python main.py
 # → Interactive menu with repository selection
 ```
-**Features**: Deep MCP analysis, manual control, detailed explanations, consultant workflow
+**Features**: Deep cross-file analysis, manual control, detailed explanations, consultant workflow
 
 ### 3. CI/CD Integration (Development Teams)
 ```bash
@@ -52,7 +52,7 @@ cp clients/security-scan.yml .github/workflows/
    - Gitleaks: Secrets detection in code and git history
    - Trivy: Dependency vulnerabilities and CVE detection
 
-2. **MCP Cross-File Analysis** (Advanced)
+2. **Cross-File Analysis** (Advanced)
    - Multi-language AST parsing for real code understanding
    - Framework detection and context-aware analysis
    - Attack chain tracing across files and languages
@@ -67,7 +67,7 @@ cp clients/security-scan.yml .github/workflows/
 4. **Comprehensive Reporting**
    - HTML reports with executive summaries and technical details
    - Automatic SBOM generation for compliance (no configuration)
-   - GitHub PR comments with MCP-enhanced context
+   - GitHub PR comments with cross-file analysis-enhanced context
    - Workflow artifacts with 90-day retention
 
 ### Auto-Remediation Modes
@@ -160,7 +160,7 @@ env:
    - Memory optimization: Streaming processing for large codebases
    - Timeout configuration: Adjustable per scanner via environment variables
 
-2. **MCP Analysis Performance**:
+2. **Cross-File Analysis Performance**:
    - File analysis caching to avoid re-parsing
    - Smart prioritization: Shows 8 most critical findings
    - Framework detection optimization for faster analysis
@@ -216,8 +216,8 @@ appsec_scanner/
 ├── src/                           # Core application code
 │   ├── main.py                   # CLI entry point - interactive scanning
 │   ├── web_app.py               # Flask web interface - team collaboration  
-│   ├── mcp_server.py            # MCP engine - cross-file analysis
-│   ├── mcp_integration.py       # MCP enhancement layer
+│   ├── mcp_server.py            # Cross-file analysis engine
+│   ├── mcp_integration.py       # Cross-file analysis enhancement layer
 │   ├── config.py                # Configuration constants and validation
 │   ├── exceptions.py            # Centralized error handling
 │   ├── logging_config.py        # Structured logging system
@@ -229,7 +229,7 @@ appsec_scanner/
 │   ├── auto_remediation/        # AI-powered fix generation
 │   │   └── remediation.py      # Core auto-fix engine with PR creation
 │   ├── reporting/              # Report generation and templates
-│   │   ├── html.py             # HTML report generation with MCP data
+│   │   ├── html.py             # HTML report generation with cross-file analysis data
 │   │   └── templates/          # Jinja2 templates for reports
 │   ├── templates/              # Web interface templates  
 │   │   └── index.html          # Main web interface with drag-drop
@@ -281,18 +281,18 @@ appsec_scanner/
 
 ## Recent Updates & Current Status
 
-### Version 1.3.0 (Latest) - Enhanced Multi-Language MCP Analysis
+### Version 1.3.0 (Latest) - Enhanced Multi-Language Cross-File Analysis
 - **Smart Finding Prioritization**: Increased from 3 to 8 most critical findings
 - **Universal Framework Detection**: Enhanced detection across all supported languages
 - **Real Attack Chain Detection**: AST-based data flow tracing across multiple files
 - **Consolidated Reporting**: Eliminated duplicate analysis sections in reports
 - **Improved Auto-Remediation Logging**: Better CI/CD debugging with detailed tracking
 
-### Version 1.2.0 - MCP Integration
+### Version 1.2.0 - Cross-File Analysis Integration
 - **Model Context Protocol**: Real cross-file vulnerability analysis engine
 - **Multi-Language AST Support**: JavaScript, Python, Java, Go, Rust, C#, Ruby, PHP, Swift, Kotlin
 - **Business Impact Assessment**: Context-aware risk analysis with cost estimates
-- **Enhanced GitHub Integration**: MCP context in PR comments and descriptions
+- **Enhanced GitHub Integration**: Cross-file analysis context in PR comments and descriptions
 
 ### Version 1.1.0 - Code Quality & Security
 - **Shared Validation Framework**: Centralized security validation across modules
@@ -316,8 +316,8 @@ A: Check scan level (`APPSEC_SCAN_LEVEL=all` to see all findings), verify scanne
 **Q: "Auto-fix not working in CI/CD?"**
 A: Verify `APPSEC_AUTO_FIX=true`, check GitHub token permissions, ensure `contents: write` access
 
-**Q: "MCP analysis missing?"**
-A: MCP enhancement automatic if findings exist, check for sufficient findings to trigger analysis
+**Q: "Cross-file analysis missing?""
+A: Cross-file analysis enhancement automatic if findings exist, check for sufficient findings to trigger analysis
 
 **Q: "SBOM files not generated?"**
 A: SBOM generation automatic in all modes, check `outputs/sbom/` directory or web interface downloads

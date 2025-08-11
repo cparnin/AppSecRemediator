@@ -2,14 +2,14 @@
 
 Production-ready security scanner with AI-powered auto-remediation.
 
-Combines static analysis (SAST), secrets detection, and dependency scanning with intelligent cross-file vulnerability analysis and automatic remediation. Features advanced Model Context Protocol (MCP) integration for real attack chain detection across 15+ programming languages.
+Combines static analysis (SAST), secrets detection, and dependency scanning with intelligent cross-file vulnerability analysis and automatic remediation. Features advanced cross-file analysis integration for real attack chain detection across 15+ programming languages.
 
 > **📄 LICENSE**: This project is open source under the MIT License. See [LICENSE](LICENSE) for details.
 
 ## Key Features
 
 - **Multi-Scanner Analysis**: Combines Semgrep (SAST), Gitleaks (secrets), and Trivy (dependencies)
-- **Advanced MCP Analysis**: Cross-file attack chain detection with AST parsing and data flow tracing
+- **Advanced Cross-File Analysis**: Cross-file attack chain detection with AST parsing and data flow tracing
 - **AI-Powered Auto-Remediation**: Automatic GitHub PRs with context-aware code fixes and dependency updates
 - **Automatic Compliance**: SBOM generation (CycloneDX & SPDX) in all deployment modes
 - **Universal Language Support**: JavaScript/TypeScript, Python, Java, Go, Rust, C#, Ruby, PHP, Swift, Kotlin, and more
@@ -64,7 +64,7 @@ cd src && python main.py
 
 **CLI Features:**
 - **Smart Repository Discovery**: Automatic git repository detection within current directory tree
-- **Detailed MCP Analysis**: Cross-file vulnerability analysis with attack chain visualization
+- **Detailed Cross-File Analysis**: Cross-file vulnerability analysis with attack chain visualization
 - **Manual Remediation Control**: Choose specific auto-fix modes (1=SAST+secrets, 2=dependencies, 3=both, 4=skip)
 - **Rich Console Output**: Progress bars, color-coded findings, and detailed explanations
 
@@ -89,7 +89,7 @@ git push
 
 **CI/CD Features:**
 - **Automatic Trigger**: Scans on pull requests and main branch pushes
-- **Intelligent PR Comments**: Security findings summary with MCP-enhanced context
+- **Intelligent PR Comments**: Security findings summary with cross-file analysis-enhanced context
 - **Separate Auto-Remediation PRs**: Code fixes and dependency updates never mixed
 - **Does Not Modify Pipeline Files**: Actions workflows (yml), GitLab, Jenkins, Azure Devops, Bitbucket
 - **Artifact Management**: Reports and SBOM files automatically uploaded as workflow artifacts
@@ -109,9 +109,9 @@ git push
 | **Gitleaks (Secrets)** | API keys, passwords, tokens, certificates in code/history | Universal | ✅ Secret removal & rotation guidance |
 | **Trivy (Dependencies)** | CVEs, outdated packages, license compliance | Universal ecosystems | ✅ Automated version updates |
 
-### Advanced MCP Enhancement
+### Advanced Cross-File Analysis Enhancement
 
-The Model Context Protocol (MCP) integration provides production-ready analysis beyond standard scanning:
+The cross-file analysis integration provides production-ready analysis beyond standard scanning:
 
 **🔗 Cross-File Attack Chain Detection**
 - **Multi-Language AST Parsing**: Real code understanding across JavaScript, Python, Java, Go, Rust, C#, Ruby, PHP, Swift, Kotlin
@@ -125,7 +125,7 @@ The Model Context Protocol (MCP) integration provides production-ready analysis 
 
 <img width="1124" height="430" alt="business_impact" src="https://github.com/user-attachments/assets/fa298f7d-039b-410f-a99f-e317c574402c" />
 
-**Example MCP Enhancement:**
+**Example Cross-File Analysis Enhancement:**
 
 **Standard Scanner Output:**
 ```
@@ -133,7 +133,7 @@ The Model Context Protocol (MCP) integration provides production-ready analysis 
 Severity: High
 ```
 
-**MCP Enhanced Analysis:**
+**Cross-File Analysis Enhanced:**
 ```
 🔴 Critical Authentication Bypass via SQL Injection
 
@@ -160,7 +160,7 @@ REMEDIATION (Auto-fixable):
 
 **HTML Reports** (`outputs/report.html`):
 - **Executive Dashboard**: Risk assessment with business impact metrics
-- **MCP Enhanced Findings**: Cross-file analysis with attack chain visualization  
+- **Cross-File Analysis Findings**: Cross-file analysis with attack chain visualization  
 - **Detailed Vulnerability Data**: CVE IDs, CVSS scores, CWE classifications
 - **Remediation Roadmap**: Prioritized action items with time estimates
 - **Compliance Mapping**: OWASP Top 10, NIST Framework, SANS 25 coverage
@@ -240,7 +240,7 @@ Input: Repository
 └─────────────────┴─────────────────┴─────────────────┘
         ↓
 ┌─────────────────────────────────────────────────────┐
-│ MCP Cross-File Analysis Engine                      │
+│ Cross-File Analysis Engine                          │
 ├─────────────────┬─────────────────┬─────────────────┤
 │ Parsing         │ Framework       │ Attack Chain    │
 │ • Multi-lang    │ Detection       │ Detection       │
@@ -253,7 +253,7 @@ Input: Repository
 ├─────────────────┬─────────────────┬─────────────────┤
 │ GPT-4.1/Claude  │ Code Generation │ PR Creation     │
 │ • Context aware │ • Framework     │ • Separate PRs  │
-│ • Business      │ specific        │ • MCP context   │
+│ • Business      │ specific        │ • Cross-file    │
 │   impact        │ • Tested fixes  │                 │
 └─────────────────┴─────────────────┴─────────────────┘
         ↓
@@ -280,7 +280,7 @@ Input: Repository
 cd src && python main.py
 # Interactive repository selection and detailed analysis
 ```
-**Benefits**: Deep MCP analysis, manual control, detailed explanations
+**Benefits**: Deep cross-file analysis, manual control, detailed explanations
 
 ### Development Teams → Web Interface  
 ```bash
@@ -315,7 +315,7 @@ appsec_scanner/
 │   ├── main.py                   # CLI entry point
 │   ├── web_app.py               # Web interface (Flask)
 │   ├── mcp_server.py            # Cross-file analysis engine
-│   ├── mcp_integration.py       # MCP enhancement layer
+│   ├── mcp_integration.py       # Cross-file analysis enhancement layer
 │   ├── scanners/                # Security scanners
 │   │   ├── semgrep.py          # SAST scanning
 │   │   ├── gitleaks.py         # Secrets detection

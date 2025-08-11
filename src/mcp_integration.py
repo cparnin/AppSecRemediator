@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """
-MCP Integration for AppSec Scanner
+Cross-File Analysis Integration for AppSec Scanner
 
-This module integrates the real MCP server with the main scanner to provide
+This module integrates the real cross-file analysis server with the main scanner to provide
 enhanced AI-powered vulnerability analysis with deep codebase understanding.
 Uses the CrossFileAnalyzer from mcp_server.py for actual cross-file analysis.
 """
@@ -13,7 +13,7 @@ from pathlib import Path
 from typing import Dict, Any, List, Optional
 import logging
 
-# Import the real MCP server functions
+# Import the real cross-file analysis server functions
 try:
     from .mcp_server import CrossFileAnalyzer
 except ImportError:
@@ -21,8 +21,8 @@ except ImportError:
 
 logger = logging.getLogger(__name__)
 
-class MCPEnhancedAnalyzer:
-    """Enhanced vulnerability analysis using real MCP CrossFileAnalyzer"""
+class CrossFileEnhancedAnalyzer:
+    """Enhanced vulnerability analysis using real CrossFileAnalyzer"""
     
     def __init__(self, repo_path: str):
         self.repo_path = repo_path
@@ -31,9 +31,9 @@ class MCPEnhancedAnalyzer:
         self.mcp_analyzer = CrossFileAnalyzer(repo_path)
     
     async def analyze_codebase_context(self) -> Dict[str, Any]:
-        """Analyze the codebase using real MCP CrossFileAnalyzer"""
+        """Analyze the codebase using real CrossFileAnalyzer"""
         try:
-            # Use real MCP analyzer for comprehensive analysis
+            # Use real cross-file analyzer for comprehensive analysis
             structure = self.mcp_analyzer.analyze_repository_structure()
             
             self.codebase_context = {
@@ -42,7 +42,7 @@ class MCPEnhancedAnalyzer:
                 "security_context": self._build_security_context(structure)
             }
             
-            logger.info(f"🧠 MCP codebase analysis complete: {structure['total_files']} files, {len(structure['languages'])} languages, {len(structure['frameworks'])} frameworks")
+            logger.info(f"🧠 Cross-file analysis complete: {structure['total_files']} files, {len(structure['languages'])} languages, {len(structure['frameworks'])} frameworks")
             return self.codebase_context
             
         except Exception as e:
@@ -106,14 +106,14 @@ class MCPEnhancedAnalyzer:
         return security_context
     
     async def analyze_cross_file_relationships(self) -> Dict[str, Any]:
-        """Analyze relationships between files using real MCP CrossFileAnalyzer"""
+        """Analyze relationships between files using real CrossFileAnalyzer"""
         try:
-            logger.info("🔍 Starting cross-file vulnerability analysis with MCP...")
+            logger.info("🔍 Starting cross-file vulnerability analysis...")
             
-            # Use real MCP analyzer for attack chain detection
+            # Use real cross-file analyzer for attack chain detection
             attack_chains = self.mcp_analyzer.find_attack_chains()
             
-            # Build cross-file analysis using real MCP data
+            # Build cross-file analysis using real cross-file analysis data
             self.cross_file_analysis = {
                 "attack_chains": [{
                     "vulnerability_type": chain.vulnerability_type,
@@ -145,7 +145,7 @@ class MCPEnhancedAnalyzer:
                 }
             }
             
-            logger.info(f"🔍 MCP cross-file analysis complete: {len(attack_chains)} attack chains identified")
+            logger.info(f"🔍 Cross-file analysis complete: {len(attack_chains)} attack chains identified")
             return self.cross_file_analysis
             
         except Exception as e:
@@ -153,7 +153,7 @@ class MCPEnhancedAnalyzer:
             return {}
     
     def _generate_attack_steps_from_chain(self, chain) -> List[str]:
-        """Generate attack steps from MCP attack chain"""
+        """Generate attack steps from cross-file analysis attack chain"""
         steps = [
             f"1. Attacker identifies entry point in {Path(chain.entry_point).name}",
             f"2. Attacker crafts {chain.vulnerability_type} payload",
@@ -163,7 +163,7 @@ class MCPEnhancedAnalyzer:
         return steps
     
     def _assess_chain_impact(self, chain) -> Dict[str, str]:
-        """Assess impact of MCP attack chain"""
+        """Assess impact of cross-file analysis attack chain"""
         impact_map = {
             'sql_injection': {"confidentiality": "High", "integrity": "High", "availability": "Medium"},
             'xss': {"confidentiality": "Medium", "integrity": "Medium", "availability": "Low"},
@@ -255,12 +255,12 @@ class MCPEnhancedAnalyzer:
             self._finding_counts[base_check] = self._finding_counts.get(base_check, 0) + 1
     
     def _generate_pr_summary(self, findings: List[Dict[str, Any]]) -> str:
-        """Generate PR comment summary with MCP insights"""
+        """Generate PR comment summary with cross-file analysis insights"""
         total_findings = len(findings)
         critical_count = len([f for f in findings if f.get('severity', '').lower() == 'critical'])
         high_count = len([f for f in findings if f.get('severity', '').lower() in ['high', 'error']])
         
-        # Get MCP insights
+        # Get cross-file analysis insights
         frameworks = self.codebase_context.get('structure', {}).get('frameworks', [])
         attack_chains = len(self.cross_file_analysis.get('attack_chains', [])) if self.cross_file_analysis else 0
         
@@ -273,7 +273,7 @@ class MCPEnhancedAnalyzer:
 - 🟠 High: {high_count}
 - 🟡 Medium: {total_findings - critical_count - high_count}
 
-### MCP Analysis
+### Cross-File Analysis
 """
         
         if frameworks:
@@ -291,12 +291,12 @@ class MCPEnhancedAnalyzer:
             elif 'flask' in frameworks:
                 summary += f"- **Flask Recommendation:** Use Flask-Talisman for security headers\n"
         
-        summary += f"\n*🧠 Generated by AppSec AI Scanner with MCP Intelligence*"
+        summary += f"\n*🧠 Generated by AppSec AI Scanner with Cross-File Analysis Intelligence*"
         
         return summary
     
     def enhance_vulnerability_analysis(self, findings: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
-        """Enhance vulnerability findings with MCP-powered context"""
+        """Enhance vulnerability findings with cross-file analysis-powered context"""
         if not self.codebase_context:
             logger.warning("No codebase context available for enhancement")
             return findings
@@ -328,7 +328,7 @@ class MCPEnhancedAnalyzer:
             cross_file_analysis = self._analyze_cross_file_implications(finding)
             enhanced_finding["cross_file_analysis"] = cross_file_analysis
             
-            # Create visible MCP summary for reports
+            # Create visible cross-file analysis summary for reports
             enhanced_finding["mcp_summary"] = self._create_mcp_summary(finding, mcp_analysis, business_impact, enhanced_remediation)
             
             enhanced_findings.append(enhanced_finding)
@@ -336,7 +336,7 @@ class MCPEnhancedAnalyzer:
         return enhanced_findings
     
     def _create_mcp_summary(self, finding: Dict[str, Any], mcp_analysis: Dict[str, Any], business_impact: Dict[str, Any], enhanced_remediation: Dict[str, Any]) -> str:
-        """Create a concise MCP analysis summary for display in reports with adaptive sizing"""
+        """Create a concise cross-file analysis summary for display in reports with adaptive sizing"""
         vuln_type = finding.get('check_id', 'Unknown').split('.')[-1].replace('-', ' ').title()
         file_path = finding.get('path', 'Unknown file')
         line_number = finding.get('line', 'N/A')
@@ -489,9 +489,9 @@ class MCPEnhancedAnalyzer:
         if summary_parts:
             # Add unique identifier at the beginning for differentiation
             summary_with_id = f"[{finding_id}] {' | '.join(summary_parts)}"
-            return f"MCP Analysis: {summary_with_id}"
+            return f"Cross-File Analysis: {summary_with_id}"
         else:
-            return f"MCP Analysis: [{finding_id}] {vuln_type} | Tech: {frameworks[0] if frameworks else 'multi-language'}"
+            return f"Cross-File Analysis: [{finding_id}] {vuln_type} | Tech: {frameworks[0] if frameworks else 'multi-language'}"
     
     def _analyze_finding_with_context(self, finding: Dict[str, Any]) -> Dict[str, Any]:
         """Analyze a finding with codebase context using real CrossFileAnalyzer data"""
@@ -509,7 +509,7 @@ class MCPEnhancedAnalyzer:
         file_path = finding.get('path', '')
         line_number = finding.get('line', 'N/A')
         
-        # Use real MCP analyzer data if available
+        # Use real cross-file analyzer data if available
         if self.codebase_context and self.cross_file_analysis:
             structure = self.codebase_context.get('structure', {})
             frameworks = structure.get('frameworks', [])
@@ -568,8 +568,8 @@ class MCPEnhancedAnalyzer:
         return analysis
     
     def _assess_business_impact(self, finding: Dict[str, Any]) -> Dict[str, Any]:
-        """Assess business impact using real MCP analyzer with enhanced context"""
-        # Get base assessment from real MCP analyzer
+        """Assess business impact using real cross-file analyzer with enhanced context"""
+        # Get base assessment from real cross-file analyzer
         base_impact = self.mcp_analyzer.assess_business_impact(finding)
         
         # Enhance with cross-file analysis context
@@ -703,7 +703,7 @@ class MCPEnhancedAnalyzer:
         return package_name[:30] if package_name else ''  # Limit length
     
     def _analyze_cross_file_implications(self, finding: Dict[str, Any]) -> Dict[str, Any]:
-        """Analyze cross-file implications using real MCP data with detailed context"""
+        """Analyze cross-file implications using real cross-file analysis data with detailed context"""
         cross_file_analysis = {
             "affected_files": [],
             "data_flow_paths": [],
@@ -792,7 +792,7 @@ class MCPEnhancedAnalyzer:
         return cross_file_analysis
     
     def generate_enhanced_report(self, findings: List[Dict[str, Any]]) -> Dict[str, Any]:
-        """Generate an enhanced report with MCP context"""
+        """Generate an enhanced report with cross-file analysis context"""
         if not self.codebase_context:
             return {"error": "No codebase context available"}
         
@@ -879,19 +879,19 @@ class MCPEnhancedAnalyzer:
         return recommendations
 
 
-async def enhance_findings_with_mcp(findings: List[Dict[str, Any]], repo_path: str) -> List[Dict[str, Any]]:
+async def enhance_findings_with_crossfile(findings: List[Dict[str, Any]], repo_path: str) -> List[Dict[str, Any]]:
     """
-    Enhance vulnerability findings using MCP-powered analysis
+    Enhance vulnerability findings using cross-file analysis-powered analysis
     
     Args:
         findings: List of vulnerability findings
         repo_path: Path to the repository
         
     Returns:
-        Enhanced findings with MCP context
+        Enhanced findings with cross-file analysis context
     """
     try:
-        analyzer = MCPEnhancedAnalyzer(repo_path)
+        analyzer = CrossFileEnhancedAnalyzer(repo_path)
         
         # Analyze codebase context
         await analyzer.analyze_codebase_context()
@@ -902,16 +902,16 @@ async def enhance_findings_with_mcp(findings: List[Dict[str, Any]], repo_path: s
         # Enhance findings with context
         enhanced_findings = analyzer.enhance_vulnerability_analysis(findings)
         
-        logger.info(f"🧠 Enhanced {len(enhanced_findings)} findings with MCP context and cross-file analysis")
+        logger.info(f"🧠 Enhanced {len(enhanced_findings)} findings with cross-file analysis context")
         return enhanced_findings
         
     except Exception as e:
-        logger.error(f"Failed to enhance findings with MCP: {e}")
+        logger.error(f"Failed to enhance findings with cross-file analysis: {e}")
         return findings
 
-async def generate_mcp_enhanced_report(findings: List[Dict[str, Any]], repo_path: str) -> Dict[str, Any]:
+async def generate_crossfile_enhanced_report(findings: List[Dict[str, Any]], repo_path: str) -> Dict[str, Any]:
     """
-    Generate an enhanced security report using MCP analysis
+    Generate an enhanced security report using cross-file analysis
     
     Args:
         findings: List of vulnerability findings
@@ -921,7 +921,7 @@ async def generate_mcp_enhanced_report(findings: List[Dict[str, Any]], repo_path
         Enhanced security report
     """
     try:
-        analyzer = MCPEnhancedAnalyzer(repo_path)
+        analyzer = CrossFileEnhancedAnalyzer(repo_path)
         
         # Analyze codebase context
         await analyzer.analyze_codebase_context()
@@ -936,9 +936,9 @@ async def generate_mcp_enhanced_report(findings: List[Dict[str, Any]], repo_path
         if analyzer.cross_file_analysis:
             report["cross_file_analysis"] = analyzer.cross_file_analysis
         
-        logger.info("🧠 Generated MCP-enhanced security report with cross-file analysis")
+        logger.info("🧠 Generated cross-file analysis-enhanced security report")
         return report
         
     except Exception as e:
-        logger.error(f"Failed to generate MCP-enhanced report: {e}")
+        logger.error(f"Failed to generate cross-file analysis-enhanced report: {e}")
         return {"error": str(e)}

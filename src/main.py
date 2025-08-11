@@ -9,14 +9,14 @@ This is the main entry point for the AppSec AI Scanner, providing:
 - Parallel scanning (Semgrep, Gitleaks, Trivy)
 - Git-aware scanning (only changed files for performance)
 - Comprehensive reporting with business context
-- MCP-enhanced vulnerability analysis with deep codebase understanding
+- Cross-file analysis-enhanced vulnerability analysis with deep codebase understanding
 - AI-powered auto-remediation creating separate PRs
 - Rich progress bars and comprehensive reporting
 
 Architecture:
 - Async/await for concurrent scanning (60-70% faster)
-- MCP integration for context-aware analysis
-- MCP integration provides context-aware vulnerability analysis
+- Cross-file analysis integration for context-aware analysis
+- Cross-file analysis integration provides context-aware vulnerability analysis
 - Separate PR creation for SAST fixes and dependency updates
 - Pipeline safety - never modifies workflow files
 
@@ -461,31 +461,31 @@ def run_auto_mode() -> List[Dict[str, Any]]:
     # Run scanners in parallel
     all_findings = run_security_scans(str(repo_path), scanners_to_run, output_dir)
     
-    # Generate reports with MCP enhancement (same as interactive mode)
+    # Generate reports with cross-file analysis enhancement (same as interactive mode)
     if all_findings:
         print(f"\n📊 Found {len(all_findings)} security findings")
         
-        # Enhance findings with MCP analysis (same as interactive mode)
+        # Enhance findings with cross-file analysis (same as interactive mode)
         enhanced_findings = all_findings
         mcp_context_summary = ""
         
-        if MCP_AVAILABLE and all_findings:
-            print("🧠 Running MCP enhancement analysis...")
+        if CROSSFILE_AVAILABLE and all_findings:
+            print("🧠 Running cross-file analysis enhancement...")
             try:
-                from mcp_integration import enhance_findings_with_mcp
-                enhanced_findings = asyncio.run(enhance_findings_with_mcp(all_findings, str(repo_path)))
+                from mcp_integration import enhance_findings_with_crossfile
+                enhanced_findings = asyncio.run(enhance_findings_with_crossfile(all_findings, str(repo_path)))
                 
-                # MCP context will be shown in the detailed section
+                # Cross-file analysis context will be shown in the detailed section
                 mcp_context_summary = ""
                 
-                print(f"✅ MCP enhanced {len(enhanced_findings)} findings with context analysis")
+                print(f"✅ Cross-file analysis enhanced {len(enhanced_findings)} findings with context analysis")
             except Exception as e:
-                logger.warning(f"MCP enhancement failed, using standard analysis: {e}")
+                logger.warning(f"Cross-file analysis enhancement failed, using standard analysis: {e}")
                 enhanced_findings = all_findings
         
         # Generate HTML report
         try:
-            # Generate AI summary with MCP insights
+            # Generate AI summary with cross-file analysis insights
             if enhanced_findings:
                 summary_stats = {
                     'total': len(enhanced_findings),
@@ -521,11 +521,11 @@ def run_auto_mode() -> List[Dict[str, Any]]:
         except Exception as e:
             logger.warning(f"Failed to generate HTML report: {e}")
         
-        # Generate MCP-enhanced reports if available
-        if MCP_AVAILABLE and enhanced_findings:
+        # Generate cross-file analysis-enhanced reports if available
+        if CROSSFILE_AVAILABLE and enhanced_findings:
             try:
-                from mcp_integration import generate_mcp_enhanced_report
-                enhanced_report = asyncio.run(generate_mcp_enhanced_report(enhanced_findings, str(repo_path)))
+                from mcp_integration import generate_crossfile_enhanced_report
+                enhanced_report = asyncio.run(generate_crossfile_enhanced_report(enhanced_findings, str(repo_path)))
                 
                 # Create PR findings summary
                 pr_summary_path = output_dir / "pr-findings.txt"
@@ -533,9 +533,9 @@ def run_auto_mode() -> List[Dict[str, Any]]:
                 with open(pr_summary_path, 'w') as f:
                     f.write(enhanced_report.get('pr_summary', 'No PR summary available'))
                 
-                print(f"📄 MCP-enhanced PR summary: {pr_summary_path}")
+                print(f"📄 Cross-file analysis-enhanced PR summary: {pr_summary_path}")
             except Exception as e:
-                logger.warning(f"MCP report generation failed: {e}")
+                logger.warning(f"Cross-file analysis report generation failed: {e}")
         
         # Auto-generate SBOM as part of security scan (same as interactive mode)
         if SBOM_AVAILABLE:
@@ -566,12 +566,12 @@ def run_auto_mode() -> List[Dict[str, Any]]:
     
     return enhanced_findings
 
-# MCP Integration for enhanced AI analysis
+# Cross-File Analysis Integration for enhanced AI analysis
 try:
-    from mcp_integration import enhance_findings_with_mcp, generate_mcp_enhanced_report
-    MCP_AVAILABLE = True
+    from mcp_integration import enhance_findings_with_crossfile, generate_crossfile_enhanced_report
+    CROSSFILE_AVAILABLE = True
 except ImportError:
-    MCP_AVAILABLE = False
+    CROSSFILE_AVAILABLE = False
 
 # SBOM and Tool Ingestion
 try:
@@ -849,21 +849,21 @@ def main() -> None:
                 enhanced_findings = all_findings
                 mcp_context_summary = ""
                 
-                if MCP_AVAILABLE and all_findings:
-                    print("🧠 Running MCP enhancement analysis...")
+                if CROSSFILE_AVAILABLE and all_findings:
+                    print("🧠 Running cross-file analysis enhancement...")
                     try:
-                        from mcp_integration import enhance_findings_with_mcp
-                        enhanced_findings = asyncio.run(enhance_findings_with_mcp(all_findings, repo_path))
+                        from mcp_integration import enhance_findings_with_crossfile
+                        enhanced_findings = asyncio.run(enhance_findings_with_crossfile(all_findings, repo_path))
                         
-                        # MCP context will be shown in the detailed section instead
+                        # Cross-file analysis context will be shown in the detailed section instead
                         mcp_context_summary = ""  # Remove from AI summary
                         
-                        print(f"✅ MCP enhanced {len(enhanced_findings)} findings with context analysis")
+                        print(f"✅ Cross-file analysis enhanced {len(enhanced_findings)} findings with context analysis")
                     except Exception as e:
-                        logger.warning(f"MCP enhancement failed, using standard analysis: {e}")
+                        logger.warning(f"Cross-file analysis enhancement failed, using standard analysis: {e}")
                         enhanced_findings = all_findings
                 
-                # Generate AI summary with MCP insights
+                # Generate AI summary with cross-file analysis insights
                 if enhanced_findings:
                     summary_stats = {
                         'total': len(enhanced_findings),
@@ -897,11 +897,11 @@ def main() -> None:
                 html_report_path = output_dir / "report.html"
                 print(f"📄 HTML report: {html_report_path}")
                 
-                # Generate MCP-enhanced reports if available
-                if MCP_AVAILABLE and enhanced_findings:
+                # Generate cross-file analysis-enhanced reports if available
+                if CROSSFILE_AVAILABLE and enhanced_findings:
                     try:
-                        from mcp_integration import generate_mcp_enhanced_report
-                        enhanced_report = asyncio.run(generate_mcp_enhanced_report(enhanced_findings, repo_path))
+                        from mcp_integration import generate_crossfile_enhanced_report
+                        enhanced_report = asyncio.run(generate_crossfile_enhanced_report(enhanced_findings, repo_path))
                         
                         # Create PR findings summary
                         pr_summary_path = output_dir / "pr-findings.txt"
@@ -909,9 +909,9 @@ def main() -> None:
                         with open(pr_summary_path, 'w') as f:
                             f.write(enhanced_report.get('pr_summary', 'No PR summary available'))
                         
-                        print(f"📄 MCP-enhanced PR summary: {pr_summary_path}")
+                        print(f"📄 Cross-file analysis-enhanced PR summary: {pr_summary_path}")
                     except Exception as e:
-                        logger.warning(f"MCP report generation failed: {e}")
+                        logger.warning(f"Cross-file analysis report generation failed: {e}")
             except Exception as e:
                 print(f"⚠️  Report generation had issues: {e}")
             

@@ -64,7 +64,7 @@ def generate_html_report(findings: List[Dict[str, Any]], ai_summary: str, output
         mcp_enhanced_count = 0
         attack_chains_count = 0
         
-        # Extract MCP analysis data for enhanced reporting with smart limits
+        # Extract cross-file analysis data for enhanced reporting with smart limits
         mcp_context_data = {
             'frameworks_detected': set(),
             'languages_detected': set(),
@@ -86,7 +86,7 @@ def generate_html_report(findings: List[Dict[str, Any]], ai_summary: str, output
             elif severity in ['high', 'error']:
                 high_count += 1
             
-            # Extract MCP analysis data from findings
+            # Extract cross-file analysis data from findings
             if finding.get('mcp_analysis'):
                 mcp_enhanced_count += 1
                 
@@ -118,7 +118,7 @@ def generate_html_report(findings: List[Dict[str, Any]], ai_summary: str, output
                         'priority': 1 if business_impact.get('financial_risk', '').lower() == 'high' else 2
                     })
             
-            # Extract technology stack info from MCP summaries
+            # Extract technology stack info from cross-file analysis summaries
             mcp_summary = finding.get('mcp_summary', '')
             if 'Tech:' in mcp_summary:
                 tech_part = mcp_summary.split('Tech:')[-1].strip()

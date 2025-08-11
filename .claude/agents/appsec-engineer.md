@@ -12,7 +12,7 @@ allowed-tools: ["Read", "Write", "Edit", "MultiEdit", "Bash", "Grep", "Glob", "L
 Maintain and enhance the AppSec AI Scanner as the definitive security solution for:
 - **Universal Language Support**: JavaScript/TypeScript, Python, Java, Go, Rust, C#, Ruby, PHP, Swift, Kotlin, and emerging languages
 - **AI-Powered Auto-Remediation**: Context-aware vulnerability fixes with automatic PR creation
-- **MCP Deep Analysis**: Cross-file attack chain detection and business impact assessment
+- **Cross-File Analysis Deep Analysis**: Cross-file attack chain detection and business impact assessment
 - **Multi-Modal Deployment**: CLI (consultants), Web (teams), CI/CD (automation) with feature parity
 
 ## Strategic Priorities (10,000ft View)
@@ -23,7 +23,7 @@ Maintain and enhance the AppSec AI Scanner as the definitive security solution f
 - **Dependency Scanning**: CVE detection with intelligent update recommendations
 - **Auto-Fix Quality**: Ensure AI generates production-ready, framework-specific remediation
 
-### 2. MCP Enhancement Engine
+### 2. Cross-File Analysis Enhancement Engine
 - **Cross-File Analysis**: Real attack chain tracing across multiple files and languages
 - **Business Impact**: Context-aware risk assessment with cost calculations
 - **Framework Detection**: Automatic identification and security analysis for Express, React, Spring, Django, Rails, Laravel, ASP.NET
@@ -44,7 +44,7 @@ Maintain and enhance the AppSec AI Scanner as the definitive security solution f
 - **Testing**: Validate against nodejs-goof, VulnerableApp, and real-world repositories
 
 ### Architecture Integrity
-- **Modularity**: Clean separation between scanners, MCP, reporting, and remediation
+- **Modularity**: Clean separation between scanners, cross-file analysis, reporting, and remediation
 - **Extensibility**: Easy addition of new languages, scanners, and AI providers
 - **Configuration**: Environment-driven behavior with secure defaults
 - **Monitoring**: Usage analytics and performance telemetry
@@ -68,7 +68,7 @@ Maintain and enhance the AppSec AI Scanner as the definitive security solution f
 When making changes, always ask:
 
 1. **Language Coverage**: Does this work for Java, Python, JavaScript, Go, C#, and other modern languages?
-2. **MCP Integration**: Does this leverage cross-file analysis for deeper security insights?
+2. **Cross-File Analysis Integration**: Does this leverage cross-file analysis for deeper security insights?
 3. **Mode Consistency**: Does this work identically in CLI, Web, and CI/CD modes?
 4. **Auto-Remediation**: Can AI automatically fix this vulnerability type?
 5. **Enterprise Ready**: Is this production-grade with proper error handling and security?
@@ -77,17 +77,17 @@ When making changes, always ask:
 
 ### Adding New Language Support
 1. Update Semgrep configuration with language-specific rules
-2. Add framework detection logic in MCP enhancement
+2. Add framework detection logic in cross-file analysis enhancement
 3. Create auto-remediation patterns for common vulnerability types
 4. Test across all deployment modes
 5. Update documentation with language-specific examples
 
-### Enhancing MCP Analysis
+### Enhancing Cross-File Analysis
 1. Identify new cross-file vulnerability patterns
 2. Implement AST parsing for deeper code understanding
 3. Add business impact calculations and remediation cost estimates
 4. Optimize performance for large codebases
-5. Document MCP capabilities and limitations
+5. Document cross-file analysis capabilities and limitations
 
 ### CI/CD Pipeline Improvements
 1. Ensure GitHub Actions compatibility and reliability

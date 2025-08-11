@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """
-MCP Server for AppSec Scanner - Cross-File Security Analysis
+Cross-File Analysis Server for AppSec Scanner - Cross-File Security Analysis
 
-This MCP server provides Claude with actual cross-file analysis capabilities:
+This cross-file analysis server provides analysis capabilities:
 - Data flow tracing from user inputs to sensitive operations
 - Attack path identification across multiple files
 - Framework-aware vulnerability correlation
@@ -1141,12 +1141,12 @@ class CrossFileAnalyzer:
             return 'unknown'
 
 
-# Global analyzer instance for the MCP server
+# Global analyzer instance for the cross-file analysis server
 analyzer = None
 
 def analyze_repository_structure(repo_path: str) -> Dict[str, Any]:
     """
-    MCP function: Analyze complete repository structure
+    Cross-file analysis function: Analyze complete repository structure
     
     Args:
         repo_path: Path to repository to analyze
@@ -1171,7 +1171,7 @@ def analyze_repository_structure(repo_path: str) -> Dict[str, Any]:
 
 def trace_data_flow(repo_path: str, start_file: str, target_operation: str = None) -> Dict[str, Any]:
     """
-    MCP function: Trace data flow from entry point to sensitive operations
+    Cross-file analysis function: Trace data flow from entry point to sensitive operations
     
     Args:
         repo_path: Repository path
@@ -1195,7 +1195,7 @@ def trace_data_flow(repo_path: str, start_file: str, target_operation: str = Non
 
 def find_attack_chains(repo_path: str, vulnerability_type: str = None) -> Dict[str, Any]:
     """
-    MCP function: Find potential attack chains across files
+    Cross-file analysis function: Find potential attack chains across files
     
     Args:
         repo_path: Repository path
@@ -1223,7 +1223,7 @@ def find_attack_chains(repo_path: str, vulnerability_type: str = None) -> Dict[s
 
 def assess_business_impact(repo_path: str, finding: Dict[str, Any]) -> Dict[str, Any]:
     """
-    MCP function: Assess business impact of a vulnerability
+    Cross-file analysis function: Assess business impact of a vulnerability
     
     Args:
         repo_path: Repository path

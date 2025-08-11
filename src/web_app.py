@@ -149,18 +149,18 @@ def scan_repository():
             scanners_to_run = ['semgrep', 'gitleaks', 'trivy']
             all_findings = run_security_scans(str(validated_path), scanners_to_run, output_dir)
             
-            # Add MCP enhancement like CLI mode does
+            # Add cross-file analysis enhancement like CLI mode does
             enhanced_findings = all_findings
             try:
-                from mcp_integration import enhance_findings_with_mcp
+                from mcp_integration import enhance_findings_with_crossfile
                 if all_findings:
-                    print("🧠 Running MCP enhancement analysis...")
-                    enhanced_findings = asyncio.run(enhance_findings_with_mcp(all_findings, str(validated_path)))
-                    print(f"✅ MCP enhanced {len(enhanced_findings)} findings with context analysis")
+                    print("🧠 Running cross-file analysis enhancement...")
+                    enhanced_findings = asyncio.run(enhance_findings_with_crossfile(all_findings, str(validated_path)))
+                    print(f"✅ Cross-file analysis enhanced {len(enhanced_findings)} findings with context analysis")
             except ImportError:
-                print("⚠️ MCP integration not available")
+                print("⚠️ Cross-file analysis integration not available")
             except Exception as e:
-                print(f"⚠️ MCP enhancement failed: {e}")
+                print(f"⚠️ Cross-file analysis enhancement failed: {e}")
                 enhanced_findings = all_findings
             
             # Generate reports using existing functions

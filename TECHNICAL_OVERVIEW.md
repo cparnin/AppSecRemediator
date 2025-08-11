@@ -12,7 +12,7 @@ Production-ready security scanner with AI-powered auto-remediation across 15+ pr
 - **Trivy**: Dependency vulnerability scanning with CVE database
 - **Parallel execution**: 60-70% faster than sequential scanning
 
-### Model Context Protocol (MCP) Integration
+### Cross-File Analysis Integration
 Advanced cross-file analysis beyond traditional SAST:
 - **AST parsing** for multiple languages (Python, JavaScript, Java, Go, etc.)
 - **Data flow tracing** across files and imports
@@ -40,7 +40,7 @@ GitHub Actions workflow with automatic PR creation and compliance reporting.
 
 ### Security Analysis
 - **15+ programming languages** supported
-- **Cross-file vulnerability detection** with MCP
+- **Cross-file vulnerability detection** with cross-file analysis
 - **Real attack chain analysis** across multiple files
 - **Framework-aware context** for accurate vulnerability assessment
 
@@ -62,7 +62,7 @@ GitHub Actions workflow with automatic PR creation and compliance reporting.
 src/
 ├── main.py                 # CLI entry point
 ├── web_app.py             # Web interface
-├── mcp_server.py          # MCP protocol server
+├── mcp_server.py          # Cross-file analysis server
 ├── mcp_integration.py     # Cross-file analysis
 ├── scanners/              # Security scanners
 ├── auto_remediation/      # AI fix generation
@@ -96,7 +96,7 @@ with:
 ## Contributing
 
 This project welcomes contributions! Key areas:
-- Additional language support for MCP analysis
+- Additional language support for cross-file analysis
 - New framework detection patterns
 - Enhanced remediation strategies
 - Performance optimizations
