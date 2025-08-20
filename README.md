@@ -1,5 +1,3 @@
-# AppSecRemediator
-
 <div align="center">
 
 <img width="400" height="400" alt="AppSecRemediator" src="https://github.com/user-attachments/assets/86732011-0dc0-4fd7-bc80-6d12eb98c5cd" />
