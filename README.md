@@ -1,6 +1,6 @@
 # AppSecRemediator
 
-<img width="1024" height="1024" alt="AppSecRemediator" src="https://github.com/user-attachments/assets/86732011-0dc0-4fd7-bc80-6d12eb98c5cd" />
+<img width="700" height="700" alt="AppSecRemediator" src="https://github.com/user-attachments/assets/86732011-0dc0-4fd7-bc80-6d12eb98c5cd" />
 
 Production-ready security scanner with AI-powered auto-remediation.
 
