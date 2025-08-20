@@ -36,10 +36,13 @@ cd AppSecRemediator
 # 1. Clone and setup environment
 git clone https://github.com/cparnin/AppSecRemediator.git
 cd AppSecRemediator
-python -m venv .venv && source .venv/bin/activate  # Windows: .venv\Scripts\activate
+python -m venv .venv && source .venv/bin/activate
+or
+python3 -m venv .venv && source .venv/bin/activate
+# Windows: .venv\Scripts\activate
 
 # 2. Install dependencies
-pip install -r requirements.txt requirements-web.txt
+pip install -r requirements.txt -r requirements-web.txt
 
 # 3. Configure API key
 cp env.example .env
