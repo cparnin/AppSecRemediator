@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """
-AppSec AI Scanner - Web Interface
+AppSecRemediator - Web Interface
 
-🔒 Web wrapper for the AppSec AI Scanner that preserves all existing functionality.
+🔒 Web wrapper for the AppSecRemediator that preserves all existing functionality.
 
 This creates web endpoints that call the exact same functions as the CLI version,
 ensuring identical behavior and maintaining all security features.
@@ -60,7 +60,7 @@ def health_check():
     """Health check endpoint for deployment monitoring."""
     return jsonify({
         'status': 'healthy',
-        'service': 'AppSec AI Scanner Web API',
+        'service': 'AppSecRemediator Web API',
         'version': '1.0.0'
     })
 
@@ -442,7 +442,7 @@ if __name__ == '__main__':
     track_usage()
     
     print("="*80)
-    print("🔒 AppSec AI Scanner Web Interface - © 2025 Chad Parnin")
+    print("🔒 AppSecRemediator Web Interface - © 2025 Chad Parnin")
     print("="*80)
     print(f"🚀 Starting Web API... [{datetime.datetime.now()}]")
     print("📖 Open Source Software - MIT License - Chad Parnin")

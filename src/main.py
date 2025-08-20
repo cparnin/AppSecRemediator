@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 """
-AppSec AI Scanner - Interactive CLI
+AppSecRemediator - Interactive CLI
 
 🔒 Production-ready security scanner with AI-powered auto-remediation
 
-This is the main entry point for the AppSec AI Scanner, providing:
+This is the main entry point for the AppSecRemediator, providing:
 - Interactive repository selection with smart discovery
 - Parallel scanning (Semgrep, Gitleaks, Trivy)
 - Git-aware scanning (only changed files for performance)
@@ -815,7 +815,7 @@ def main() -> None:
     
     # Otherwise run interactive mode
     print("\n" + "="*80)
-    print("🔒 AppSec AI Scanner - © 2025 Chad Parnin")
+    print("🔒 AppSecRemediator - © 2025 Chad Parnin")
     print("="*80)
     print("AI-powered security scanner that finds vulnerabilities and creates fixes")
     print("📖 Open Source Software - MIT License - Chad Parnin")

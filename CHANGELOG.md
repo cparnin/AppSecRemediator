@@ -5,9 +5,17 @@ All notable changes to AppSecRemediator are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [1.4.0] - 2025-08-20
+## [1.0.0] - 2025-08-20 - First GitHub Marketplace Release
 
-### Rebranding
+### 🚀 Initial Public Release as AppSecRemediator
+- **GitHub Actions Marketplace**: First public release available to the community
+- **Complete Security Solution**: SAST, secrets detection, dependency scanning, and AI-powered auto-remediation
+- **Cross-File Analysis**: Advanced vulnerability detection across multiple files and languages
+- **Universal Language Support**: JavaScript, Python, Java, Go, Rust, C#, Ruby, PHP, Swift, Kotlin, and more
+- **Three Deployment Options**: CLI, Web interface, and GitHub Actions integration
+- **AI-Powered Auto-Fixes**: Automated pull requests with context-aware code fixes
+
+### Rebranding from Previous Internal Versions
 - **Project Renamed**: Changed from "AppSec AI Scanner" to "AppSecRemediator" for better clarity
 - **Repository Update**: New repository URL: github.com/cparnin/AppSecRemediator
 - **Terminology Update**: Replaced all "MCP" references with "cross-file analysis" throughout codebase

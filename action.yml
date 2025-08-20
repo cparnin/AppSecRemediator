@@ -108,8 +108,8 @@ runs:
     - name: Configure Git for auto-remediation
       shell: bash
       run: |
-        git config --global user.email "test@gmail.com"
-        git config --global user.name "AppSec AI Scanner"
+        git config --global user.email "action@github.com"
+        git config --global user.name "AppSecRemediator Bot"
         
     - name: Run AppSec Scanner
       shell: bash

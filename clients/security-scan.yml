@@ -29,7 +29,7 @@ jobs:
           
       - name: Run AppSecRemediator
         id: scanner
-        uses: cparnin/AppSecRemediator@main  # Always uses latest - no version management needed
+        uses: cparnin/AppSecRemediator@main  # Use @v1 after marketplace release
         env:
           GH_TOKEN: ${{ github.token }}
           #APPSEC_AUTO_FIX_DELAY: '2'  # Optional: Add 2-second delay between fixes to prevent API rate limiting

@@ -83,7 +83,7 @@ class SBOMGenerator:
                 # Add our metadata
                 metadata = {
                     "generated_at": datetime.now().isoformat(),
-                    "generator": "AppSec AI Scanner with Syft",
+                    "generator": "AppSecRemediator with Syft",
                     "repository_path": str(self.repo_path),
                     "format": output_format,
                     "options": {
@@ -182,7 +182,7 @@ class SBOMGenerator:
             if vulnerability_data:
                 enhanced_sbom = sbom_data.copy()
                 enhanced_sbom["vulnerabilityData"] = vulnerability_data
-                enhanced_sbom["enhancedBy"] = "AppSec AI Scanner"
+                enhanced_sbom["enhancedBy"] = "AppSecRemediator"
                 return enhanced_sbom
             
             return sbom_data
@@ -228,7 +228,7 @@ class SBOMGenerator:
             "documentNamespace": f"https://sbom.chadparnin.com/{self.repo_path.name}",
             "creationInfo": {
                 "created": datetime.now().isoformat(),
-                "creators": ["Tool: AppSec AI Scanner with Syft"]
+                "creators": ["Tool: AppSecRemediator with Syft"]
             },
             "packages": []
         }
@@ -264,7 +264,7 @@ class SBOMGenerator:
                 "tools": [
                     {
                         "vendor": "Chad Parnin",
-                        "name": "AppSec AI Scanner",
+                        "name": "AppSecRemediator",
                         "version": "1.0.0"
                     }
                 ]

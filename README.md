@@ -1,9 +1,10 @@
+# AppSecRemediator
+
 <div align="center">
 
 <img width="400" height="400" alt="AppSecRemediator" src="https://github.com/user-attachments/assets/86732011-0dc0-4fd7-bc80-6d12eb98c5cd" />
 
 </div>
-
 
 Production-ready security scanner with AI-powered auto-remediation.
 
@@ -76,9 +77,26 @@ cd src && python main.py
 
 <img width="738" height="239" alt="Screenshot 2025-08-01 at 8 24 06 AM" src="https://github.com/user-attachments/assets/93bfff32-f88f-448c-a5b2-62f17dd88fe0" />
 
-### CI/CD Integration (GitHub Action workflow file)
+### GitHub Actions Integration
 
-**Drop-in GitHub Actions workflow:**
+**Option 1: Use the Action directly in your workflow:**
+```yaml
+name: Security Scan
+on: [push, pull_request]
+
+jobs:
+  security-scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: cparnin/AppSecRemediator@main  # Use @v1.0.0 after release
+        with:
+          openai-api-key: ${{ secrets.OPENAI_API_KEY }}
+          auto-fix: 'true'
+          scan-level: 'critical-high'
+```
+
+**Option 2: Use the drop-in workflow template:**
 ```bash
 # 1. Copy workflow file
 cp clients/security-scan.yml .github/workflows/
@@ -89,7 +107,7 @@ cp clients/security-scan.yml .github/workflows/
 
 # 3. Commit and push
 git add .github/workflows/security-scan.yml
-git commit -m "Add AppSec AI Scanner workflow"
+git commit -m "Add AppSecRemediator workflow"
 git push
 ```
 
