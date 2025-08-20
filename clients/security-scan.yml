@@ -27,9 +27,9 @@ jobs:
         with:
           fetch-depth: 0
           
-      - name: Run AppSec AI Scanner
+      - name: Run AppSecRemediator
         id: scanner
-        uses: cparnin/appsec_ai_mcp_scanner@main  # Always uses latest - no version management needed
+        uses: cparnin/AppSecRemediator@main  # Always uses latest - no version management needed
         env:
           GH_TOKEN: ${{ github.token }}
           #APPSEC_AUTO_FIX_DELAY: '2'  # Optional: Add 2-second delay between fixes to prevent API rate limiting

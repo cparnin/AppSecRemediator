@@ -4,7 +4,7 @@ Cross-File Analysis Integration for AppSec Scanner
 
 This module integrates the real cross-file analysis server with the main scanner to provide
 enhanced AI-powered vulnerability analysis with deep codebase understanding.
-Uses the CrossFileAnalyzer from mcp_server.py for actual cross-file analysis.
+Uses the CrossFileAnalyzer from crossfile_analyzer.py for actual cross-file analysis.
 """
 
 import json
@@ -15,9 +15,9 @@ import logging
 
 # Import the real cross-file analysis server functions
 try:
-    from .mcp_server import CrossFileAnalyzer
+    from .crossfile_analyzer import CrossFileAnalyzer
 except ImportError:
-    from mcp_server import CrossFileAnalyzer
+    from crossfile_analyzer import CrossFileAnalyzer
 
 logger = logging.getLogger(__name__)
 
@@ -28,13 +28,13 @@ class CrossFileEnhancedAnalyzer:
         self.repo_path = repo_path
         self.codebase_context = None
         self.cross_file_analysis = None
-        self.mcp_analyzer = CrossFileAnalyzer(repo_path)
+        self.crossfile_analyzer = CrossFileAnalyzer(repo_path)
     
     async def analyze_codebase_context(self) -> Dict[str, Any]:
         """Analyze the codebase using real CrossFileAnalyzer"""
         try:
             # Use real cross-file analyzer for comprehensive analysis
-            structure = self.mcp_analyzer.analyze_repository_structure()
+            structure = self.crossfile_analyzer.analyze_repository_structure()
             
             self.codebase_context = {
                 "repo_path": self.repo_path,
@@ -111,7 +111,7 @@ class CrossFileEnhancedAnalyzer:
             logger.info("🔍 Starting cross-file vulnerability analysis...")
             
             # Use real cross-file analyzer for attack chain detection
-            attack_chains = self.mcp_analyzer.find_attack_chains()
+            attack_chains = self.crossfile_analyzer.find_attack_chains()
             
             # Build cross-file analysis using real cross-file analysis data
             self.cross_file_analysis = {
@@ -313,8 +313,8 @@ class CrossFileEnhancedAnalyzer:
             enhanced_finding = finding.copy()
             
             # Add context-aware analysis
-            mcp_analysis = self._analyze_finding_with_context(finding)
-            enhanced_finding["mcp_analysis"] = mcp_analysis
+            crossfile_analysis = self._analyze_finding_with_context(finding)
+            enhanced_finding["crossfile_analysis"] = crossfile_analysis
             
             # Add business impact assessment
             business_impact = self._assess_business_impact(finding)
@@ -329,13 +329,13 @@ class CrossFileEnhancedAnalyzer:
             enhanced_finding["cross_file_analysis"] = cross_file_analysis
             
             # Create visible cross-file analysis summary for reports
-            enhanced_finding["mcp_summary"] = self._create_mcp_summary(finding, mcp_analysis, business_impact, enhanced_remediation)
+            enhanced_finding["crossfile_summary"] = self._create_crossfile_summary(finding, crossfile_analysis, business_impact, enhanced_remediation)
             
             enhanced_findings.append(enhanced_finding)
         
         return enhanced_findings
     
-    def _create_mcp_summary(self, finding: Dict[str, Any], mcp_analysis: Dict[str, Any], business_impact: Dict[str, Any], enhanced_remediation: Dict[str, Any]) -> str:
+    def _create_crossfile_summary(self, finding: Dict[str, Any], crossfile_analysis: Dict[str, Any], business_impact: Dict[str, Any], enhanced_remediation: Dict[str, Any]) -> str:
         """Create a concise cross-file analysis summary for display in reports with adaptive sizing"""
         vuln_type = finding.get('check_id', 'Unknown').split('.')[-1].replace('-', ' ').title()
         file_path = finding.get('path', 'Unknown file')
@@ -570,7 +570,7 @@ class CrossFileEnhancedAnalyzer:
     def _assess_business_impact(self, finding: Dict[str, Any]) -> Dict[str, Any]:
         """Assess business impact using real cross-file analyzer with enhanced context"""
         # Get base assessment from real cross-file analyzer
-        base_impact = self.mcp_analyzer.assess_business_impact(finding)
+        base_impact = self.crossfile_analyzer.assess_business_impact(finding)
         
         # Enhance with cross-file analysis context
         file_path = finding.get('path', '')

@@ -1,9 +1,22 @@
 # Changelog
 
-All notable changes to AppSec AI Scanner are documented in this file.
+All notable changes to AppSecRemediator are documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## [1.4.0] - 2025-08-20
+
+### Rebranding
+- **Project Renamed**: Changed from "AppSec AI Scanner" to "AppSecRemediator" for better clarity
+- **Repository Update**: New repository URL: github.com/cparnin/AppSecRemediator
+- **Terminology Update**: Replaced all "MCP" references with "cross-file analysis" throughout codebase
+- **File Renaming**: Renamed mcp_server.py to crossfile_analyzer.py and mcp_integration.py to crossfile_integration.py
+
+### Technical Improvements
+- **Consistent Naming**: Updated all internal references, variables, and functions to use "crossfile" terminology
+- **Documentation Update**: Revised all documentation to reflect new project name and terminology
+- **GitHub Actions**: Updated workflow references to use new repository name
 
 ## [1.3.0] - 2025-01-28
 
@@ -39,7 +52,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Improvements
 - **Multi-Language AST Support**: JavaScript/TypeScript, Python, Java, Go, Rust, C#, Ruby, Kotlin, PHP, Swift
 - **Smart Vulnerability Prioritization**: Intelligent ranking by severity and attack potential
-- **Enhanced PR Context**: MCP analysis included in GitHub PR comments
+- **Enhanced PR Context**: Cross-file analysis included in GitHub PR comments
 - **Comprehensive Framework Support**: Detection of modern web frameworks across all languages
 
 ### Compliance
@@ -113,12 +126,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Upgrade Notes
 
 ### From v1.2.x to v1.3.x
-- MCP analysis now provides 8 prioritized findings instead of 3
+- Cross-file analysis now provides 8 prioritized findings instead of 3
 - Enhanced framework detection may identify additional vulnerabilities
 - Improved reporting format with consolidated sections
 
 ### From v1.1.x to v1.2.x
-- New MCP dependency requires no configuration changes
+- New cross-file analysis dependency requires no configuration changes
 - Enhanced findings may increase total vulnerability counts
 - SBOM generation now automatic in all modes
 

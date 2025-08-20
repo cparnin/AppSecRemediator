@@ -1,4 +1,4 @@
-# AppSec AI Scanner
+# AppSecRemediator
 
 Production-ready security scanner with AI-powered auto-remediation.
 
@@ -22,8 +22,8 @@ Combines static analysis (SAST), secrets detection, and dependency scanning with
 
 **Zero-configuration setup:**
 ```bash
-git clone https://github.com/cparnin/appsec_ai_mcp_scanner.git
-cd appsec_scanner
+git clone https://github.com/cparnin/AppSecRemediator.git
+cd AppSecRemediator
 ./start_web.sh
 # → Automatically opens http://localhost:8000
 ```
@@ -31,8 +31,8 @@ cd appsec_scanner
 **Manual installation:**
 ```bash
 # 1. Clone and setup environment
-git clone https://github.com/cparnin/appsec_ai_mcp_scanner.git
-cd appsec_scanner
+git clone https://github.com/cparnin/AppSecRemediator.git
+cd AppSecRemediator
 python -m venv .venv && source .venv/bin/activate  # Windows: .venv\Scripts\activate
 
 # 2. Install dependencies
@@ -152,7 +152,7 @@ REMEDIATION (Auto-fixable):
 • Add input sanitization in middleware layer
 • Implement query result validation
 ```
-<img width="1175" height="457" alt="mcp_analysis" src="https://github.com/user-attachments/assets/2765e711-1a1d-4366-8d21-f5222966e356" />
+<img width="1175" height="457" alt="crossfile_analysis" src="https://github.com/user-attachments/assets/2765e711-1a1d-4366-8d21-f5222966e356" />
 
 ## Reports & Compliance
 
@@ -204,7 +204,7 @@ SECURITY_ENGINEER_HOURLY_RATE=150       # For cost estimation calculations
 ### CI/CD Workflow Configuration
 ```yaml
 # .github/workflows/security-scan.yml
-uses: cparnin/appsec_ai_mcp_scanner@main
+uses: cparnin/AppSecRemediator@main
 with:
   openai-api-key: ${{ secrets.OPENAI_API_KEY }}
   auto-fix: 'true'                       # Enable automatic remediation
@@ -310,12 +310,12 @@ cp clients/security-scan.yml .github/workflows/
 
 ## Project Structure
 ```
-appsec_scanner/
+AppSecRemediator/
 ├── src/                           # Core application
 │   ├── main.py                   # CLI entry point
 │   ├── web_app.py               # Web interface (Flask)
-│   ├── mcp_server.py            # Cross-file analysis engine
-│   ├── mcp_integration.py       # Cross-file analysis enhancement layer
+│   ├── crossfile_analyzer.py    # Cross-file analysis engine
+│   ├── crossfile_integration.py # Cross-file analysis enhancement layer
 │   ├── scanners/                # Security scanners
 │   │   ├── semgrep.py          # SAST scanning
 │   │   ├── gitleaks.py         # Secrets detection
@@ -390,7 +390,7 @@ grep -r "APPSEC_" src/
 ```
 
 ### Getting Help
-- **GitHub Issues**: [Report bugs and request features](https://github.com/cparnin/appsec_ai_mcp_scanner/issues)
+- **GitHub Issues**: [Report bugs and request features](https://github.com/cparnin/AppSecRemediator/issues)
 - **General**: chadparnin@gmail.com
 
 ## Usage Analytics

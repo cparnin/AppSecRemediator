@@ -70,7 +70,7 @@ logging.getLogger("anthropic").setLevel(logging.ERROR)
 logging.getLogger("urllib3").setLevel(logging.ERROR)
 logging.getLogger("auto_remediation").setLevel(logging.ERROR)
 logging.getLogger("sbom_generator").setLevel(logging.ERROR)
-logging.getLogger("mcp_integration").setLevel(logging.ERROR)
+logging.getLogger("crossfile_integration").setLevel(logging.ERROR)
 logging.getLogger("scanners.trivy").setLevel(logging.ERROR)
 logging.getLogger("scanners.semgrep").setLevel(logging.ERROR)
 logging.getLogger("scanners.gitleaks").setLevel(logging.ERROR)
@@ -467,16 +467,16 @@ def run_auto_mode() -> List[Dict[str, Any]]:
         
         # Enhance findings with cross-file analysis (same as interactive mode)
         enhanced_findings = all_findings
-        mcp_context_summary = ""
+        crossfile_context_summary = ""
         
         if CROSSFILE_AVAILABLE and all_findings:
             print("🧠 Running cross-file analysis enhancement...")
             try:
-                from mcp_integration import enhance_findings_with_crossfile
+                from crossfile_integration import enhance_findings_with_crossfile
                 enhanced_findings = asyncio.run(enhance_findings_with_crossfile(all_findings, str(repo_path)))
                 
                 # Cross-file analysis context will be shown in the detailed section
-                mcp_context_summary = ""
+                crossfile_context_summary = ""
                 
                 print(f"✅ Cross-file analysis enhanced {len(enhanced_findings)} findings with context analysis")
             except Exception as e:
@@ -505,7 +505,7 @@ def run_auto_mode() -> List[Dict[str, Any]]:
 • {summary_stats['high']} high-severity issues needing prompt remediation
 • {summary_stats['sast']} code security issues (SAST)
 • {summary_stats['secrets']} secrets detected in repository
-• {summary_stats['deps']} vulnerable dependencies identified{mcp_context_summary}
+• {summary_stats['deps']} vulnerable dependencies identified{crossfile_context_summary}
 
 **Recommended Actions:**
 1. Prioritize critical vulnerabilities for immediate patching
@@ -524,7 +524,7 @@ def run_auto_mode() -> List[Dict[str, Any]]:
         # Generate cross-file analysis-enhanced reports if available
         if CROSSFILE_AVAILABLE and enhanced_findings:
             try:
-                from mcp_integration import generate_crossfile_enhanced_report
+                from crossfile_integration import generate_crossfile_enhanced_report
                 enhanced_report = asyncio.run(generate_crossfile_enhanced_report(enhanced_findings, str(repo_path)))
                 
                 # Create PR findings summary
@@ -568,7 +568,7 @@ def run_auto_mode() -> List[Dict[str, Any]]:
 
 # Cross-File Analysis Integration for enhanced AI analysis
 try:
-    from mcp_integration import enhance_findings_with_crossfile, generate_crossfile_enhanced_report
+    from crossfile_integration import enhance_findings_with_crossfile, generate_crossfile_enhanced_report
     CROSSFILE_AVAILABLE = True
 except ImportError:
     CROSSFILE_AVAILABLE = False
@@ -841,22 +841,22 @@ def main() -> None:
             print("🔍 Running security scan with auto-fix options...")
             all_findings = run_security_scans(repo_path, ["semgrep", "gitleaks", "trivy"], output_dir)
             
-            # Generate reports with MCP enhancement
+            # Generate reports with cross-file analysis enhancement
             try:
                 print("📊 Generating reports...")
                 
-                # Enhance findings with MCP analysis first
+                # Enhance findings with cross-file analysis first
                 enhanced_findings = all_findings
-                mcp_context_summary = ""
+                crossfile_context_summary = ""
                 
                 if CROSSFILE_AVAILABLE and all_findings:
                     print("🧠 Running cross-file analysis enhancement...")
                     try:
-                        from mcp_integration import enhance_findings_with_crossfile
+                        from crossfile_integration import enhance_findings_with_crossfile
                         enhanced_findings = asyncio.run(enhance_findings_with_crossfile(all_findings, repo_path))
                         
                         # Cross-file analysis context will be shown in the detailed section instead
-                        mcp_context_summary = ""  # Remove from AI summary
+                        crossfile_context_summary = ""  # Remove from AI summary
                         
                         print(f"✅ Cross-file analysis enhanced {len(enhanced_findings)} findings with context analysis")
                     except Exception as e:
@@ -883,7 +883,7 @@ def main() -> None:
 • {summary_stats['high']} high-severity issues needing prompt remediation
 • {summary_stats['sast']} code security issues (SAST)
 • {summary_stats['secrets']} secrets detected in repository
-• {summary_stats['deps']} vulnerable dependencies identified{mcp_context_summary}
+• {summary_stats['deps']} vulnerable dependencies identified{crossfile_context_summary}
 
 **Recommended Actions:**
 1. Prioritize critical vulnerabilities for immediate patching
@@ -900,7 +900,7 @@ def main() -> None:
                 # Generate cross-file analysis-enhanced reports if available
                 if CROSSFILE_AVAILABLE and enhanced_findings:
                     try:
-                        from mcp_integration import generate_crossfile_enhanced_report
+                        from crossfile_integration import generate_crossfile_enhanced_report
                         enhanced_report = asyncio.run(generate_crossfile_enhanced_report(enhanced_findings, repo_path))
                         
                         # Create PR findings summary

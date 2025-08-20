@@ -62,8 +62,8 @@ GitHub Actions workflow with automatic PR creation and compliance reporting.
 src/
 ├── main.py                 # CLI entry point
 ├── web_app.py             # Web interface
-├── mcp_server.py          # Cross-file analysis server
-├── mcp_integration.py     # Cross-file analysis
+├── crossfile_analyzer.py  # Cross-file analysis server
+├── crossfile_integration.py # Cross-file analysis
 ├── scanners/              # Security scanners
 ├── auto_remediation/      # AI fix generation
 └── reporting/             # HTML report generation
@@ -79,7 +79,7 @@ src/
 
 ### GitHub Actions
 ```yaml
-uses: cparnin/appsec-ai-scanner@main
+uses: cparnin/AppSecRemediator@main
 with:
   scan-level: 'critical-high'
   auto-fix: 'true'

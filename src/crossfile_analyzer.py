@@ -1162,7 +1162,7 @@ def analyze_repository_structure(repo_path: str) -> Dict[str, Any]:
         return {
             "status": "success",
             "analysis": result,
-            "mcp_version": "2.0",
+            "crossfile_version": "2.0",
             "capabilities": ["cross_file_analysis", "data_flow_tracing", "attack_chain_detection"]
         }
     except Exception as e:
@@ -1252,4 +1252,4 @@ if __name__ == "__main__":
         result = analyze_repository_structure(repo_path)
         print(json.dumps(result, indent=2))
     else:
-        print("Usage: python mcp_server.py <repo_path>")
+        print("Usage: python crossfile_analyzer.py <repo_path>")

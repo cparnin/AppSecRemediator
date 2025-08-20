@@ -78,7 +78,7 @@
       white-space: pre-line;
     }
     
-    .mcp-enhancement {
+    .crossfile-enhancement {
       background: linear-gradient(135deg, #38b2ac 0%, #319795 100%);
       color: white;
       border-radius: 12px;
@@ -293,7 +293,7 @@
     </div>
     {% endif %}
 
-    {% if mcp_context_data and (attack_chains_count > 0 or mcp_enhanced_count > 0) %}
+    {% if crossfile_context_data and (attack_chains_count > 0 or crossfile_enhanced_count > 0) %}
       <div style="border-top: 2px solid rgba(255,255,255,0.3); margin-top: 1.5rem; padding-top: 1.5rem;">
         <h3 style="color: white; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
           <span>📊</span> Detailed Cross-File Analysis
@@ -301,7 +301,7 @@
         <div style="background: rgba(255,255,255,0.1); border-radius: 12px; padding: 1.5rem; margin-bottom: 1rem;">
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 1rem;">
           <div style="text-align: center; background: rgba(255,255,255,0.1); padding: 1rem; border-radius: 8px;">
-            <div style="font-size: 2rem; font-weight: bold;">{{ mcp_enhanced_count }}</div>
+            <div style="font-size: 2rem; font-weight: bold;">{{ crossfile_enhanced_count }}</div>
             <div style="font-size: 0.9rem; opacity: 0.9;">Cross-File Analysis Enhanced</div>
           </div>
           <div style="text-align: center; background: rgba(255,255,255,0.1); padding: 1rem; border-radius: 8px;">
@@ -309,26 +309,26 @@
             <div style="font-size: 0.9rem; opacity: 0.9;">Attack Chains</div>
           </div>
           <div style="text-align: center; background: rgba(255,255,255,0.1); padding: 1rem; border-radius: 8px;">
-            <div style="font-size: 2rem; font-weight: bold; color: #fbb6ce;">{{ mcp_context_data.frameworks_detected|length }}</div>
+            <div style="font-size: 2rem; font-weight: bold; color: #fbb6ce;">{{ crossfile_context_data.frameworks_detected|length }}</div>
             <div style="font-size: 0.9rem; opacity: 0.9;">Frameworks</div>
           </div>
         </div>
         
-        {% if mcp_context_data.frameworks_detected %}
+        {% if crossfile_context_data.frameworks_detected %}
         <div style="border-top: 1px solid rgba(255,255,255,0.2); padding-top: 1rem; margin-top: 1rem;">
           <strong style="display: block; margin-bottom: 0.5rem;">🛠️ Technology Stack Detected:</strong>
           <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
-            {% for framework in mcp_context_data.frameworks_detected %}
+            {% for framework in crossfile_context_data.frameworks_detected %}
             <span style="background: rgba(255,255,255,0.2); padding: 0.25rem 0.75rem; border-radius: 12px; font-size: 0.9rem;">{{ framework }}</span>
             {% endfor %}
           </div>
         </div>
         {% endif %}
         
-        {% if mcp_context_data.attack_chains %}
+        {% if crossfile_context_data.attack_chains %}
         <div style="margin-bottom: 1.5rem;">
           <h4 style="margin-bottom: 1rem; color: white; opacity: 0.9;">⛓️ Cross-File Attack Chains</h4>
-        {% for chain in mcp_context_data.attack_chains %}
+        {% for chain in crossfile_context_data.attack_chains %}
           <div style="background: rgba(255,255,255,0.15); border-left: 4px solid #f56565; padding: 1rem; border-radius: 6px; margin-bottom: 0.75rem;">
             <div style="display: flex; justify-content: between; align-items: start; gap: 1rem;">
               <div style="flex: 1;">
@@ -343,18 +343,18 @@
             </div>
           </div>
         {% endfor %}
-          {% if mcp_context_data.is_large_scan %}
+          {% if crossfile_context_data.is_large_scan %}
           <div style="text-align: center; color: rgba(255,255,255,0.7); font-style: italic; margin-top: 0.5rem; background: rgba(255,255,255,0.1); padding: 0.5rem; border-radius: 6px;">
-            📊 <strong>Large scan detected</strong> - Showing top {{ mcp_context_data.max_attack_chains }} critical attack chains (compact mode)
+            📊 <strong>Large scan detected</strong> - Showing top {{ crossfile_context_data.max_attack_chains }} critical attack chains (compact mode)
           </div>
           {% endif %}
         </div>
         {% endif %}
       
-        {% if mcp_context_data.business_impacts %}
+        {% if crossfile_context_data.business_impacts %}
         <div>
           <h4 style="margin-bottom: 1rem; color: white; opacity: 0.9;">📊 Business Impact Analysis</h4>
-        {% for impact in mcp_context_data.business_impacts %}
+        {% for impact in crossfile_context_data.business_impacts %}
           <div style="background: rgba(255,255,255,0.15); border-left: 4px solid #38a169; padding: 1rem; border-radius: 6px; margin-bottom: 0.75rem;">
             <div style="display: flex; justify-content: between; align-items: start; gap: 1rem;">
               <div style="flex: 1;">
@@ -366,9 +366,9 @@
             </div>
           </div>
         {% endfor %}
-          {% if mcp_context_data.is_large_scan %}
+          {% if crossfile_context_data.is_large_scan %}
           <div style="text-align: center; color: rgba(255,255,255,0.7); font-style: italic; margin-top: 0.5rem; background: rgba(255,255,255,0.1); padding: 0.5rem; border-radius: 6px;">
-            🎯 Showing top {{ mcp_context_data.max_business_impacts }} high-impact findings (compact mode active)
+            🎯 Showing top {{ crossfile_context_data.max_business_impacts }} high-impact findings (compact mode active)
           </div>
           {% endif %}
         </div>
@@ -484,13 +484,13 @@
                   :{{ f.get('line') }}
                 {% endif %}
               </span>
-              {% if f.get('mcp_summary') %}
+              {% if f.get('crossfile_summary') %}
                 <div style="margin-top: 0.8rem; background: linear-gradient(135deg, rgba(49, 130, 206, 0.1) 0%, rgba(56, 178, 172, 0.1) 100%); border-left: 4px solid #3182ce; padding: 0.75rem; border-radius: 6px; font-size: 0.9rem;">
                   <div style="display: flex; align-items: flex-start; gap: 0.5rem;">
                     <span style="color: #3182ce; font-size: 1.1rem; margin-top: -2px;">🧠</span>
                     <div style="color: #2d3748; line-height: 1.5;">
                       <strong style="color: #2b6cb0;">Cross-File Analysis Enhanced:</strong><br>
-                      <span style="color: #4a5568;">{{ f.mcp_summary }}</span>
+                      <span style="color: #4a5568;">{{ f.crossfile_summary }}</span>
                     </div>
                   </div>
                 </div>

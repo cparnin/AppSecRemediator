@@ -61,11 +61,11 @@ def generate_html_report(findings: List[Dict[str, Any]], ai_summary: str, output
         total_findings = len(findings)
         critical_count = 0
         high_count = 0
-        mcp_enhanced_count = 0
+        crossfile_enhanced_count = 0
         attack_chains_count = 0
         
         # Extract cross-file analysis data for enhanced reporting with smart limits
-        mcp_context_data = {
+        crossfile_context_data = {
             'frameworks_detected': set(),
             'languages_detected': set(),
             'attack_chains': [],
@@ -87,16 +87,16 @@ def generate_html_report(findings: List[Dict[str, Any]], ai_summary: str, output
                 high_count += 1
             
             # Extract cross-file analysis data from findings
-            if finding.get('mcp_analysis'):
-                mcp_enhanced_count += 1
+            if finding.get('crossfile_analysis'):
+                crossfile_enhanced_count += 1
                 
                 # Extract cross-file analysis with limits
                 cross_file = finding.get('cross_file_analysis', {})
-                if cross_file.get('potential_attack_chains') and len(mcp_context_data['attack_chains']) < max_attack_chains * 2:
+                if cross_file.get('potential_attack_chains') and len(crossfile_context_data['attack_chains']) < max_attack_chains * 2:
                     for chain in cross_file['potential_attack_chains']:
-                        if len(mcp_context_data['attack_chains']) >= max_attack_chains * 2:
+                        if len(crossfile_context_data['attack_chains']) >= max_attack_chains * 2:
                             break
-                        mcp_context_data['attack_chains'].append({
+                        crossfile_context_data['attack_chains'].append({
                             'type': chain.get('chain_type', 'Unknown'),
                             'severity': chain.get('severity', 'Unknown'),
                             'entry_point': chain.get('entry_point', 'Unknown'),
@@ -109,8 +109,8 @@ def generate_html_report(findings: List[Dict[str, Any]], ai_summary: str, output
                 
                 # Extract business impact data with limits
                 business_impact = finding.get('business_impact', {})
-                if business_impact.get('business_justification') and len(mcp_context_data['business_impacts']) < max_business_impacts * 2:
-                    mcp_context_data['business_impacts'].append({
+                if business_impact.get('business_justification') and len(crossfile_context_data['business_impacts']) < max_business_impacts * 2:
+                    crossfile_context_data['business_impacts'].append({
                         'file': finding.get('path', ''),
                         'vulnerability': finding.get('check_id', ''),
                         'impact': business_impact.get('business_justification', ''),
@@ -119,31 +119,31 @@ def generate_html_report(findings: List[Dict[str, Any]], ai_summary: str, output
                     })
             
             # Extract technology stack info from cross-file analysis summaries
-            mcp_summary = finding.get('mcp_summary', '')
+            mcp_summary = finding.get('crossfile_summary', '')
             if 'Tech:' in mcp_summary:
                 tech_part = mcp_summary.split('Tech:')[-1].strip()
                 if tech_part:
                     frameworks = [fw.strip() for fw in tech_part.split(',')]
-                    mcp_context_data['frameworks_detected'].update(frameworks)
+                    crossfile_context_data['frameworks_detected'].update(frameworks)
         
         # Sort and limit data for template
-        mcp_context_data['frameworks_detected'] = list(mcp_context_data['frameworks_detected'])[:8]  # Max 8 frameworks
-        mcp_context_data['languages_detected'] = list(mcp_context_data['languages_detected'])
+        crossfile_context_data['frameworks_detected'] = list(crossfile_context_data['frameworks_detected'])[:8]  # Max 8 frameworks
+        crossfile_context_data['languages_detected'] = list(crossfile_context_data['languages_detected'])
         
         # Sort attack chains by priority (critical/high first) and limit
-        mcp_context_data['attack_chains'] = sorted(mcp_context_data['attack_chains'], 
+        crossfile_context_data['attack_chains'] = sorted(crossfile_context_data['attack_chains'], 
                                                   key=lambda x: (x.get('priority', 2), x.get('type', '')))
-        mcp_context_data['attack_chains'] = mcp_context_data['attack_chains'][:max_attack_chains]
+        crossfile_context_data['attack_chains'] = crossfile_context_data['attack_chains'][:max_attack_chains]
         
         # Sort business impacts by priority and limit
-        mcp_context_data['business_impacts'] = sorted(mcp_context_data['business_impacts'],
+        crossfile_context_data['business_impacts'] = sorted(crossfile_context_data['business_impacts'],
                                                      key=lambda x: (x.get('priority', 2), x.get('file', '')))
-        mcp_context_data['business_impacts'] = mcp_context_data['business_impacts'][:max_business_impacts]
+        crossfile_context_data['business_impacts'] = crossfile_context_data['business_impacts'][:max_business_impacts]
         
         # Add metadata for template
-        mcp_context_data['is_large_scan'] = is_large_scan
-        mcp_context_data['max_attack_chains'] = max_attack_chains
-        mcp_context_data['max_business_impacts'] = max_business_impacts
+        crossfile_context_data['is_large_scan'] = is_large_scan
+        crossfile_context_data['max_attack_chains'] = max_attack_chains
+        crossfile_context_data['max_business_impacts'] = max_business_impacts
         
         # Look for SBOM data in outputs directory
         sbom_data = {}
@@ -195,9 +195,9 @@ def generate_html_report(findings: List[Dict[str, Any]], ai_summary: str, output
             repo_path=repo_path or "Unknown Repository",
             sbom_data=sbom_data,
             scan_timestamp=scan_timestamp,
-            mcp_enhanced_count=mcp_enhanced_count,
+            crossfile_enhanced_count=crossfile_enhanced_count,
             attack_chains_count=attack_chains_count,
-            mcp_context_data=mcp_context_data
+            crossfile_context_data=crossfile_context_data
         )
         
         # Write HTML report

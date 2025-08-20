@@ -1,4 +1,4 @@
-name: 'AppSec AI Scanner'
+name: 'AppSecRemediator'
 description: 'AI-powered security scanner with SAST, secrets detection, dependency scanning, and auto-remediation'
 author: 'Chad Parnin'
 

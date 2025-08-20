@@ -152,7 +152,7 @@ def scan_repository():
             # Add cross-file analysis enhancement like CLI mode does
             enhanced_findings = all_findings
             try:
-                from mcp_integration import enhance_findings_with_crossfile
+                from crossfile_integration import enhance_findings_with_crossfile
                 if all_findings:
                     print("🧠 Running cross-file analysis enhancement...")
                     enhanced_findings = asyncio.run(enhance_findings_with_crossfile(all_findings, str(validated_path)))

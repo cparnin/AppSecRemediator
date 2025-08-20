@@ -7,7 +7,7 @@ python-dotenv>=0.19.0
 requests>=2.26.0
 gitpython>=3.1.0  # For Git operations
 rich>=13.0.0  # Rich terminal UI and progress bars
-# MCP functionality built-in with CrossFileAnalyzer - no external dependencies needed
+# Cross-file analysis functionality built-in with CrossFileAnalyzer - no external dependencies needed
 
 # Development dependencies
 typing-extensions>=4.0.0
