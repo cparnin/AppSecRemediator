@@ -1,10 +1,10 @@
 # AppSecRemediator
 
+<img width="1024" height="1024" alt="AppSecRemediator" src="https://github.com/user-attachments/assets/86732011-0dc0-4fd7-bc80-6d12eb98c5cd" />
+
 Production-ready security scanner with AI-powered auto-remediation.
 
 Combines static analysis (SAST), secrets detection, and dependency scanning with intelligent cross-file vulnerability analysis and automatic remediation. Features advanced cross-file analysis integration for real attack chain detection across 15+ programming languages.
-
-> **📄 LICENSE**: This project is open source under the MIT License. See [LICENSE](LICENSE) for details.
 
 ## Key Features
 
