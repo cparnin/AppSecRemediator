@@ -3,7 +3,7 @@
 <img width="400" height="400" alt="AppSecRemediator" src="https://github.com/user-attachments/assets/86732011-0dc0-4fd7-bc80-6d12eb98c5cd" />
 
 </div>
------
+##
 Production-ready security scanner with AI-powered auto-remediation.
 
 Combines static analysis (SAST), secrets detection, and dependency scanning with intelligent cross-file vulnerability analysis and automatic remediation. Features advanced cross-file analysis integration for real attack chain detection across 15+ programming languages.
