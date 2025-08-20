@@ -89,7 +89,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: cparnin/AppSecRemediator@main  # Use @v1.0.0 after release
+      - uses: cparnin/AppSecRemediator@main
         with:
           openai-api-key: ${{ secrets.OPENAI_API_KEY }}
           auto-fix: 'true'
